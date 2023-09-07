@@ -4,3 +4,6 @@
 [submodule "lib/hyperlane-quickstart"]
 	path = lib/hyperlane-quickstart
 	url = https://github.com/hyperlane-xyz/hyperlane-quickstart
+[submodule "contracts/lib/hyperlane-quickstart"]
+	path = contracts/lib/hyperlane-quickstart
+	url = https://github.com/hyperlane-xyz/hyperlane-quickstart
