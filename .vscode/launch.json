@@ -27,6 +27,24 @@
         {
             "type": "lldb",
             "request": "launch",
+            "name": "Debug executable 'app' query",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=app",
+                    "--package=app"
+                ],
+                "filter": {
+                    "name": "app",
+                    "kind": "bin"
+                }
+            },
+            "args": ["query", "--from-block=4243635"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
             "name": "Debug executable 'app'",
             "cargo": {
                 "args": [

@@ -10,4 +10,5 @@ bindings = { path = "../bindings" }
 clap = { version = "4.4.2", features = ["derive"] }
 ethers = { version = "2", default-features = false, features = ["rustls"] }
 eyre = "0.6"
+hex = "0.4.3"
 tokio = { version = "1.19", features = ["macros","rt-multi-thread"] }
