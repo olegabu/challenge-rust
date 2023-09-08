@@ -12,9 +12,6 @@ enum Command {
         /// Private key of demo account
         #[arg(long, default_value = "c1836c120a271f4633073501c04cc93a6ee2ba3b267847cb0fc90e29765d1694")]
         private_key: String,
-        /// ID of the sender chain
-        #[arg(long, default_value_t = 11155111)]
-        sender_id: u32,
         /// Message to send
         #[arg(long, default_value = "hello from rust")]
         message: String
@@ -47,12 +44,14 @@ struct Args {
     command: Command
 }
 
-async fn send(sender_rpc: String, sender_address: String, private_key: String, sender_id: u32, receiver_id: u32, receiver_address: String, message: String) -> Result<()> {
-    println!("delivering via {} from contract {} on chain {} to contract {} on chain {} message '{}'", sender_rpc, sender_address, sender_id, receiver_address, receiver_id, message);
+async fn send(sender_rpc: String, sender_address: String, private_key: String, receiver_id: u32, receiver_address: String, message: String) -> Result<()> {
+    println!("delivering via {} from contract {} to contract {} on chain {} message '{}'", sender_rpc, sender_address, receiver_address, receiver_id, message);
 
     let sender_address = sender_address.parse::<Address>()?;
 
     let provider = Provider::try_from(sender_rpc)?;
+
+    let sender_id = provider.get_chainid().await?.as_u32();
 
     // safer not to hard code nor provide as cli arg
     // let private_key = env::var("demo_key")?;
@@ -125,7 +124,7 @@ async fn query(sender_rpc: String, from_block: u32, sender_address: String, rece
 async fn main() -> Result<()> {
     let args = Args::parse();
     match args.command {
-        Command::Send {private_key, sender_id, message} => send(args.sender_rpc, args.sender_address, private_key, sender_id, args.receiver_id, args.receiver_address, message).await,
+        Command::Send {private_key, message} => send(args.sender_rpc, args.sender_address, private_key, args.receiver_id, args.receiver_address, message).await,
         Command::Query {from_block}  => query(args.sender_rpc, from_block, args.sender_address, args.receiver_id, args.receiver_address).await
     }
 }
