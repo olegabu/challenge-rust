@@ -111,11 +111,12 @@ Let's query Sepolia and Mumbai for the event logs of our sender and receiver con
 cast logs --rpc-url $sepolia --from-block 4243635 --address $sender &&
 cast logs --rpc-url $mumbai --from-block 39868015 --address $receiver
 ```
-
-## Generate Rust bindings to the contracts
+### Demo Rust CLI
 
 Before we build the Rust CLI app we need to wrap our Solidity contracts into Rust code.
-For our one simple method it may look excessive but demonstrates a rich workflow.
+For our one simple method in one contract it may look excessive but here it demonstrates my workflow.
+
+#### Generate Rust bindings to the contracts
 
 Rust bindings to the contracts can be generated via `forge bind`, which requires
 first building our contracts. Move back to the project's root.
@@ -124,8 +125,6 @@ first building our contracts. Move back to the project's root.
 forge build --root ./contracts &&
 forge bind --bindings-path ./bindings --root ./contracts --crate-name bindings --overwrite
 ```
-
-## Demo Rust CLI
 
 Build and test.
 
@@ -162,7 +161,7 @@ Options:
           Contract address on the receiver chain [default: 6482CdA5DF7605B52592a3D04af1f7e3004262FE]
 ```
 
-### Send messages
+#### Send messages
 
 Use these defaults to send a message from Sepolia to Mumbai between our contracts.
 
@@ -183,7 +182,7 @@ Send another message, [check it out](https://explorer.hyperlane.xyz/message/0x2d
 cargo run -- send --message 'another message from rust cli'
 ```
 
-### Query messages
+#### Query messages
 
 We can query for *Dispatch* events of the origin chain's Mailbox contract.
 
@@ -217,7 +216,7 @@ Note the starting block is still our default 4243635 which can be overriden with
 cargo run -- --receiver-address=* --sender-address=* --receiver-id=0 query
 ```
 
-See here messages to Moonbase Alpha with chain id 1287.
+See other messages that passed thru Sepolia's mailbox, like one to Moonbase Alpha with chain id 1287.
 
 ```
 27 logs found
