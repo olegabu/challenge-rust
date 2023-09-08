@@ -18,7 +18,7 @@ The project is structured as a mixed Rust workspace with a Foundry project under
 ## Testing
 
 Given the repository contains Solidity and Rust code as well as it uses Foundry, 
-there are 3 different workflows.
+there are 3 different workflows: Solidity unit tests, demo with Foundry, demo with Rust CLI.
 
 ### Test Solidity
 
@@ -30,7 +30,7 @@ Forge is using submodules to manage dependencies. Initialize the dependencies.
 forge install
 ```
 
-Build contracts in [src](./src) and test with [Messaging.t.sol](test/Messaging.t.sol).
+Build contracts in [src](./contracts/src) and test with [Messaging.t.sol](./contracts/test/Messaging.t.sol).
 
 ```bash
 forge build &&
