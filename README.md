@@ -20,7 +20,7 @@ The project is structured as a mixed Rust workspace with a Foundry project under
 Given the repository contains both Solidity and Rust code, there's 2 different
 workflows.
 
-### Solidity
+### Test Solidity
 
 Move to [contracts](./contracts) folder.
 
@@ -37,7 +37,7 @@ forge build &&
 forge test
 ```
 
-### Demo
+### Demo with Foundry
 
 Let's use tools from [Foundry](https://getfoundry.sh) suite: 
 [forge](https://book.getfoundry.sh/forge/) to build and test, 
@@ -108,12 +108,6 @@ cast logs --rpc-url $sepolia --from-block 4243635 --address $sender &&
 cast logs --rpc-url $mumbai --from-block 39868015 --address $receiver
 ```
 
-### Rust
-
-```bash
-cargo test
-```
-
 ## Generating Rust bindings to the contracts
 
 Rust bindings to the contracts can be generated via `forge bind`, which requires
@@ -128,20 +122,9 @@ Any follow-on calls to `forge bind` will check that the generated bindings match
 the ones under the build files. If you want to re-generate your bindings, pass
 the `--overwrite` flag to your `forge bind` command.
 
-## Installing Foundry
+## Test Rust CLI
 
-First run the command below to get `foundryup`, the Foundry toolchain installer:
-
-```sh
-curl -L https://foundry.paradigm.xyz | bash
+```bash
+cargo test
 ```
 
-Then, in a new terminal session or after reloading your `PATH`, run it to get
-the latest `forge` and `cast` binaries:
-
-```sh
-foundryup
-```
-
-For more, see the official
-[docs](https://github.com/gakonst/foundry#installation).

@@ -1,0 +1,66 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'bindings'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=bindings"
+                ],
+                "filter": {
+                    "name": "bindings",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'app'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=app",
+                    "--package=app"
+                ],
+                "filter": {
+                    "name": "app",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {"demo_key": "c1836c120a271f4633073501c04cc93a6ee2ba3b267847cb0fc90e29765d1694"}
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'app'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=app",
+                    "--package=app"
+                ],
+                "filter": {
+                    "name": "app",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
