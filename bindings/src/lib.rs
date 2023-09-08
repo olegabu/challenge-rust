@@ -4,3 +4,12 @@
 //! Do not manually edit these files.
 //! These files may be overwritten by the codegen system at any time.
 pub mod counter;
+pub mod hyperlane_message_receiver;
+pub mod hyperlane_message_sender;
+pub mod i_interchain_security_module;
+pub mod i_mailbox;
+pub mod i_message_recipient;
+pub mod i_specifies_interchain_security_module;
+pub mod mock_mailbox;
+pub mod type_casts;
+pub mod versioned;

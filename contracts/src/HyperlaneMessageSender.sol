@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.13;
 
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
 
-import "hyperlane-xyz/core/interfaces/IMailbox.sol";
+import "hyperlane-monorepo/solidity/contracts/interfaces/IMailbox.sol";
 
 contract HyperlaneMessageSender {
     IMailbox outbox;
