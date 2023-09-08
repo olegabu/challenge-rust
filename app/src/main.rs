@@ -81,14 +81,6 @@ async fn send(sender_rpc: String, sender_address: String, private_key: String, s
     Ok(())
 }
 
-/*
-export interface MatchingListElement {
-  originDomain?: '*' | number | number[];
-  senderAddress?: '*' | string | string[];
-  destinationDomain?: '*' | number | number[];
-  recipientAddress?: '*' | string | string[];
-} */
-
 const MAILBOX_ADDRESS: &str = "0xCC737a94FecaeC165AbCf12dED095BB13F037685";
 const EVENT_SIGNATURE: &str = "Dispatch(address,uint32,bytes32,bytes)";
 
@@ -96,19 +88,23 @@ async fn query(sender_rpc: String, from_block: u32, sender_address: String, rece
     let provider =  Arc::new(Provider::try_from(sender_rpc)?);
     let client = Arc::new(provider);
 
-    let topic1 = sender_address.parse::<Address>()?; // address sender
-    let topic2 = U256::from(receiver_id); // uint32 destination
-
-    let recipient = format!("000000000000000000000000{}", receiver_address);
-    let topic3 = recipient.parse::<H256>()?;
-
-    let filter = Filter::new()
+    let mut filter = Filter::new()
         .address(MAILBOX_ADDRESS.parse::<Address>()?)
         .event(EVENT_SIGNATURE) // Dispatch (index_topic_1 address sender, index_topic_2 uint32 destination, index_topic_3 bytes32 recipient, bytes message)
-        .topic1(topic1) 
-        .topic2(topic2) 
-        .topic3(topic3) 
         .from_block(from_block);
+
+    if sender_address != "*" {
+        filter = filter.topic1(sender_address.parse::<Address>()?); // address sender
+    }
+
+    if receiver_id != 0 {
+        filter = filter.topic2(U256::from(receiver_id)); // uint32 destination
+    }
+
+    if receiver_address != "*" {
+        let recipient = format!("000000000000000000000000{}", receiver_address);
+        filter = filter.topic3(recipient.parse::<H256>()?); // bytes32 recipient
+    }
 
     let logs = client.get_logs(&filter).await?;
     
