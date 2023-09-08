@@ -1,6 +1,6 @@
 # Hyperlane Rust Challenge
 
-This repo hosts Rust and Solidity code for the soluton to [Abacus Works Rust Challenge](https://docs.google.com/document/d/1JGVZPSZ6vFzeFjIhOvxdXiU7-FzTQfFb5mq8UVrL4C4/edit#heading=h.a9izzxpgeg32).
+This repo hosts Rust and Solidity code for the soluton to Hyperlane Rust Challenge.
 
 ## Directory Structure
 
